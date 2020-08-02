@@ -14,7 +14,7 @@ namespace WindowsFormsTimer01
     {
         private DateTime m_dateTimeFininsh = DateTime.MinValue;
         private int m_iRawSec = 0;
-        private int m_iPadding = 30;//sec
+        private int m_iPadding = 15;//sec
         private Dictionary<string, double> dictFoodSetToWeight;
         private Dictionary<string, int[]> dictFoodSetToIngred;
         public Form1()
@@ -27,6 +27,7 @@ namespace WindowsFormsTimer01
                 { "Pickled", 0.88 },
                 { "Vinegar", 0.22 },
                 { "Beer", 0.59 },
+                { "Sw.Ham", 0.94 },
                 { "", 1.00 }
             };
 
@@ -35,6 +36,7 @@ namespace WindowsFormsTimer01
                 { "Pickled", new int[] { 8, 4, 2, 2 } },
                 { "Vinegar", new int[] { 1, 1, 1, 1 } },
                 { "Beer", new int[] { 5, 6, 2, 1 } },
+                { "Sw.Ham", new int[] { 2, 2, 5, 4 } },
                 { "", new int[] { 1 } }
             };
 
@@ -121,8 +123,8 @@ namespace WindowsFormsTimer01
             if (int.TryParse(textBox1.Text, out int numOfTimes)
                 && int.TryParse(listBox1.Text, out int iTimeMultiplier))
             {
-                if (checkBox1.Checked == false)
-                    iTimeMultiplier += 4;
+                if (checkBox1.Checked == true)
+                    iTimeMultiplier -= 4;
                 m_iRawSec = numOfTimes * iTimeMultiplier + m_iPadding;//got the raw second, keep this number.
             }
             m_dateTimeFininsh = DateTime.Now.AddSeconds(m_iRawSec);
