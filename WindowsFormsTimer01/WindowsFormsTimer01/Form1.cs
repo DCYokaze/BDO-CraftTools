@@ -17,6 +17,7 @@ namespace WindowsFormsTimer01
         private int m_iPadding = 15;//sec
         private Dictionary<string, double> dictFoodSetToWeight;
         private Dictionary<string, int[]> dictFoodSetToIngred;
+        private Dictionary<string, string[]> dictIngredName;
         public Form1()
         {
             InitializeComponent();
@@ -40,6 +41,16 @@ namespace WindowsFormsTimer01
                 { "", new int[] { 1 } }
             };
 
+            dictIngredName = new Dictionary<string, string[]>
+            {
+                { "Pickled", new string[] { "ผัก", "นส้ม", "จุล", "นตาล" } },
+                { "Vinegar", new string[] { "ผล", "ธัญ", "จุล", "นตาล" } },
+                { "Beer", new string[] { "ธัญ", "น้ำ", "จุล", "นตาล" } },
+                { "Sw.Ham", new string[] { "ปังนุ่ม", "ไส้ก.ย่าง", "ผัก", "ไข่" } },
+                { "", new string[] { "" } }
+            };
+            //*/
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -53,15 +64,10 @@ namespace WindowsFormsTimer01
             {
                 m_iRawSec -= 1;
 
-                //lblCountdown.Text = (m_dateTimeFininsh.Subtract(DateTime.Now).).ToString("HH:mm:ss");
                 DateTime d = DateTime.Now;
                 TimeSpan ts = m_dateTimeFininsh.Subtract(d);
-                //ts.
                 lblCountdown.Text = ts.ToString(@"hh\:mm\:ss");//(m_dateTimeFininsh - d).ToString("HH:mm:ss");
 
-                //lblHH.Text = (m_iRawSec / 3600).ToString();
-                //lblMM.Text = ((m_iRawSec / 60) % 60).ToString();
-                //lblSS.Text = (m_iRawSec % 60).ToString();
                 if(m_iRawSec == 0)
                 {
                     //this.BringToFront();
@@ -88,38 +94,36 @@ namespace WindowsFormsTimer01
         private void CalculateWeightNumToDo()
         {
             string sFoodSet = listBox2.Text;
-            double weightLeft;// = int.Parse(textBox2.Text);
-            double weightEachSet = dictFoodSetToWeight[sFoodSet];// = double.Parse(listBox2.Text);
+            double weightEachSet = dictFoodSetToWeight[sFoodSet];
             int iNumOfSetToCarry = 0;
-            if ( double.TryParse(textBox2.Text, out weightLeft) )
+            if ( double.TryParse(textBox2.Text, out double weightLeft) )
             {
                 iNumOfSetToCarry = Convert.ToInt32(Math.Floor(weightLeft / weightEachSet));
             }
-                
-            numOfSetToCarry.Text = iNumOfSetToCarry.ToString();
+            
+            numberOfSetToCarry.Text = iNumOfSetToCarry.ToString();
 
             textBox3.Text = "";
             if (iNumOfSetToCarry > 0)
             {
+                int j = 0;//another index - -''
                 foreach (int i in dictFoodSetToIngred[sFoodSet])
                 {
-                    String s = (iNumOfSetToCarry * i).ToString();
-             
-                    textBox3.AppendText(s);
+                    String sNumOfIngred = (iNumOfSetToCarry * i).ToString();
+                    //String 
+                    String sNameOfIngred = dictIngredName[sFoodSet][j];
+                    textBox3.AppendText(sNumOfIngred);
+                    textBox3.AppendText("-");
+                    textBox3.AppendText(sNameOfIngred);
+                    //dictIngredName
                     textBox3.AppendText(Environment.NewLine);
+                    j++;
                 }
-                //textBox3.Text = s;
             }
-
-
-            //System.Console.WriteLine(listBox2.Text);
-            //if(listBox2.SelectedValue.ToString() )
         }
 
         private void btnSetTimer_Click(object sender, EventArgs e)
         {
-            //int numOfTimes = int.Parse(textBox1.Text);
-            //iTimeMultiplier = ;
             if (int.TryParse(textBox1.Text, out int numOfTimes)
                 && int.TryParse(listBox1.Text, out int iTimeMultiplier))
             {
@@ -137,6 +141,39 @@ namespace WindowsFormsTimer01
             m_dateTimeFininsh = DateTime.MinValue;
             lblETA.Text = m_dateTimeFininsh.ToString("HH:mm:ss");
             lblCountdown.Text = lblETA.Text;
+        }
+
+        private void numberOfSetToCarry_TextChanged(object sender, EventArgs e)
+        {
+            return;
+            //the revese version of ...
+            string sFoodSet = listBox2.Text;
+            double weightEachSet = dictFoodSetToWeight[sFoodSet];
+            int iNumOfSetToCarry = 0;
+            if (int.TryParse(numberOfSetToCarry.Text, out int numOfSet))
+            {
+                textBox2.Text = (numOfSet * weightEachSet).ToString();
+            }
+
+            iNumOfSetToCarry = numOfSet; //Why bother this?
+
+            textBox3.Text = "";
+            if (iNumOfSetToCarry > 0)
+            {
+                int j = 0;//another index - -''
+                foreach (int i in dictFoodSetToIngred[sFoodSet])
+                {
+                    String sNumOfIngred = (iNumOfSetToCarry * i).ToString();
+                    //String 
+                    String sNameOfIngred = dictIngredName[sFoodSet][j];
+                    textBox3.AppendText(sNumOfIngred);
+                    textBox3.AppendText("-");
+                    textBox3.AppendText(sNameOfIngred);
+                    //dictIngredName
+                    textBox3.AppendText(Environment.NewLine);
+                    j++;
+                }
+            }
         }
     }
 }
