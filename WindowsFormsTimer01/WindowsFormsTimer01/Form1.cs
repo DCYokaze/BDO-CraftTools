@@ -15,51 +15,17 @@ namespace WindowsFormsTimer01
         private DateTime m_dateTimeFininsh = DateTime.MinValue;
         private int m_iRawSec = 0;
         private int m_iPadding = 15;//sec
-        private Dictionary<string, double> dictFoodSetToWeight;
-        private Dictionary<string, int[]> dictFoodSetToIngred;
-        private Dictionary<string, string[]> dictIngredName;
+        private List<DataBaseMemory> db;
+
         public Form1()
         {
             InitializeComponent();
             timer1.Start();
-
-            dictFoodSetToWeight = new Dictionary<string, double>
-            {
-                { "Pickled", 0.88 },
-                { "Vinegar", 0.22 },
-                { "Beer", 0.59 },
-                { "Sw.Ham", 0.94 },
-                { "", 1.00 }
-            };
-
-            dictFoodSetToIngred = new Dictionary<string, int[]>
-            {
-                { "Pickled", new int[] { 8, 4, 2, 2 } },
-                { "Vinegar", new int[] { 1, 1, 1, 1 } },
-                { "Beer", new int[] { 5, 6, 2, 1 } },
-                { "Sw.Ham", new int[] { 2, 2, 5, 4 } },
-                { "", new int[] { 1 } }
-            };
-
-            dictIngredName = new Dictionary<string, string[]>
-            {
-                { "Pickled", new string[] { "ผัก", "นส้ม", "จุล", "นตาล" } },
-                { "Vinegar", new string[] { "ผล", "ธัญ", "จุล", "นตาล" } },
-                { "Beer", new string[] { "ธัญ", "น้ำ", "จุล", "นตาล" } },
-                { "Sw.Ham", new string[] { "ปังนุ่ม", "ไส้ก.ย่าง", "ผัก", "ไข่" } },
-                { "", new string[] { "" } }
-            };
-            //*/
-
+            db = new List<DataBaseMemory>();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //lblClockDisplay.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
-
-            //lblClockDisplay2.Text = DateTime.Now.AddSeconds(30).ToString("HH:mm:ss");
-            //int timeCountDown = int.Parse(lblSS.Text);
-            
             if (m_iRawSec > 0)
             {
                 m_iRawSec -= 1;
@@ -94,7 +60,10 @@ namespace WindowsFormsTimer01
         private void CalculateWeightNumToDo()
         {
             string sFoodSet = listBox2.Text;
-            double weightEachSet = dictFoodSetToWeight[sFoodSet];
+            //double weightEachSet = dictFoodSetToWeight[sFoodSet];
+            DataBaseMemory d = db[listBox2.SelectedIndex];
+            double weightEachSet = d.weight;
+            
             int iNumOfSetToCarry = 0;
             if ( double.TryParse(textBox2.Text, out double weightLeft) )
             {
@@ -102,22 +71,20 @@ namespace WindowsFormsTimer01
             }
             
             numberOfSetToCarry.Text = iNumOfSetToCarry.ToString();
-
+            
             textBox3.Text = "";
             if (iNumOfSetToCarry > 0)
             {
-                int j = 0;//another index - -''
-                foreach (int i in dictFoodSetToIngred[sFoodSet])
+                for (int i = 0; i < d.ingrediences.Count ; i++)
                 {
-                    String sNumOfIngred = (iNumOfSetToCarry * i).ToString();
-                    //String 
-                    String sNameOfIngred = dictIngredName[sFoodSet][j];
+                    int iIngredNum = d.ingrediences[i].Item1;
+                    String sIngredName = d.ingrediences[i].Item2;
+
+                    String sNumOfIngred = (iNumOfSetToCarry * iIngredNum).ToString();
                     textBox3.AppendText(sNumOfIngred);
                     textBox3.AppendText("-");
-                    textBox3.AppendText(sNameOfIngred);
-                    //dictIngredName
+                    textBox3.AppendText(sIngredName);
                     textBox3.AppendText(Environment.NewLine);
-                    j++;
                 }
             }
         }
@@ -147,33 +114,53 @@ namespace WindowsFormsTimer01
         {
             return;
             //the revese version of ...
-            string sFoodSet = listBox2.Text;
-            double weightEachSet = dictFoodSetToWeight[sFoodSet];
-            int iNumOfSetToCarry = 0;
-            if (int.TryParse(numberOfSetToCarry.Text, out int numOfSet))
-            {
-                textBox2.Text = (numOfSet * weightEachSet).ToString();
-            }
+        }
 
-            iNumOfSetToCarry = numOfSet; //Why bother this?
-
-            textBox3.Text = "";
-            if (iNumOfSetToCarry > 0)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            System.IO.StreamReader reader = System.IO.File.OpenText("data.txt");
+            string line;
+            while ((line = reader.ReadLine()) != null)
             {
-                int j = 0;//another index - -''
-                foreach (int i in dictFoodSetToIngred[sFoodSet])
+                DataBaseMemory d = new DataBaseMemory();
+                //d = new DataBaseMemory();
+                string[] items = line.Split(',');
+                //d->name = "0";
+                d.name = items[0];
+                d.weight = double.Parse(items[1]);
+
+                for(int i = 2; i < items.Length; i = i+2)
                 {
-                    String sNumOfIngred = (iNumOfSetToCarry * i).ToString();
-                    //String 
-                    String sNameOfIngred = dictIngredName[sFoodSet][j];
-                    textBox3.AppendText(sNumOfIngred);
-                    textBox3.AppendText("-");
-                    textBox3.AppendText(sNameOfIngred);
-                    //dictIngredName
-                    textBox3.AppendText(Environment.NewLine);
-                    j++;
+                    Tuple<int, string> t = Tuple.Create(int.Parse(items[i]),items[i+1]);
+                    d.ingrediences.Add(t);
                 }
+                db.Add(d);
+                listBox2.Items.Add(d.name);
+                //listBox2.ControlAdded();
             }
+            //
+            int x = 0;
         }
     }
+    public class DataBaseMemory
+    {
+        public string name { get; set; }//food's name
+        public double weight { get; set; } //each set of food's ingredient (summation of them)
+
+        //yeah, this will be the list of them.
+        public List<Tuple<int, string>> ingrediences { get; set; }
+
+        public DataBaseMemory()
+        {
+            name = "";
+            weight = 0;
+            ingrediences = new List<Tuple<int, string>>();
+        }
+        //what should we do?
+        ~DataBaseMemory()
+        {
+            ingrediences.Clear();
+        }
+    }
+
 }
