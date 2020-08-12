@@ -32,11 +32,11 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnSetTimer = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.numberOfSetToCarry = new System.Windows.Forms.TextBox();
@@ -45,6 +45,7 @@
             this.lblCountdown = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dUpDown2 = new System.Windows.Forms.DomainUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -73,19 +74,6 @@
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "0";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Items.AddRange(new object[] {
-            "10",
-            "15",
-            "16"});
-            this.listBox1.Location = new System.Drawing.Point(174, 78);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(29, 52);
-            this.listBox1.TabIndex = 7;
             // 
             // textBox2
             // 
@@ -118,6 +106,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.domainUpDown1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox3);
@@ -130,6 +119,14 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "WeightCalc";
+            // 
+            // domainUpDown1
+            // 
+            this.domainUpDown1.Location = new System.Drawing.Point(224, 211);
+            this.domainUpDown1.Name = "domainUpDown1";
+            this.domainUpDown1.Size = new System.Drawing.Size(120, 22);
+            this.domainUpDown1.TabIndex = 10;
+            this.domainUpDown1.Text = "domainUpDown1";
             // 
             // label3
             // 
@@ -204,13 +201,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.dUpDown2);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.lblCountdown);
             this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.btnStop);
             this.groupBox2.Controls.Add(this.lblETA);
             this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.listBox1);
             this.groupBox2.Controls.Add(this.btnSetTimer);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
@@ -219,11 +216,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Timer";
             // 
+            // dUpDown2
+            // 
+            this.dUpDown2.Items.Add("10");
+            this.dUpDown2.Items.Add("15");
+            this.dUpDown2.Items.Add("16");
+            this.dUpDown2.Items.Add("17");
+            this.dUpDown2.Location = new System.Drawing.Point(167, 98);
+            this.dUpDown2.Name = "dUpDown2";
+            this.dUpDown2.Size = new System.Drawing.Size(50, 22);
+            this.dUpDown2.TabIndex = 14;
+            this.dUpDown2.Text = "10";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(164, 58);
+            this.label2.Location = new System.Drawing.Point(164, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 17);
             this.label2.TabIndex = 9;
@@ -252,7 +261,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnSetTimer;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.TextBox textBox3;
@@ -266,6 +274,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox numberOfSetToCarry;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DomainUpDown domainUpDown1;
+        private System.Windows.Forms.DomainUpDown dUpDown2;
     }
 }
 

@@ -14,7 +14,7 @@ namespace WindowsFormsTimer01
     {
         private DateTime m_dateTimeFininsh = DateTime.MinValue;
         private int m_iRawSec = 0;
-        private int m_iPadding = 15;//sec
+        private int m_iPadding = 10;//sec
         private List<DataBaseMemory> db;
 
         public Form1()
@@ -92,7 +92,7 @@ namespace WindowsFormsTimer01
         private void btnSetTimer_Click(object sender, EventArgs e)
         {
             if (int.TryParse(textBox1.Text, out int numOfTimes)
-                && int.TryParse(listBox1.Text, out int iTimeMultiplier))
+                && int.TryParse(dUpDown2.Text, out int iTimeMultiplier))
             {
                 if (checkBox1.Checked == true)
                     iTimeMultiplier -= 4;
