@@ -36,7 +36,6 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.numberOfSetToCarry = new System.Windows.Forms.TextBox();
@@ -47,6 +46,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dUpDown2 = new System.Windows.Forms.DomainUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +62,7 @@
             this.btnSetTimer.Name = "btnSetTimer";
             this.btnSetTimer.Size = new System.Drawing.Size(75, 23);
             this.btnSetTimer.TabIndex = 1;
-            this.btnSetTimer.Text = "sec";
+            this.btnSetTimer.Text = "sec(+10)";
             this.btnSetTimer.UseVisualStyleBackColor = true;
             this.btnSetTimer.Click += new System.EventHandler(this.btnSetTimer_Click);
             // 
@@ -91,7 +91,7 @@
             this.listBox2.ItemHeight = 16;
             this.listBox2.Location = new System.Drawing.Point(95, 18);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(63, 148);
+            this.listBox2.Size = new System.Drawing.Size(63, 180);
             this.listBox2.TabIndex = 7;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
@@ -101,12 +101,11 @@
             this.textBox3.Location = new System.Drawing.Point(164, 18);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(94, 106);
+            this.textBox3.Size = new System.Drawing.Size(127, 106);
             this.textBox3.TabIndex = 8;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.domainUpDown1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox3);
@@ -115,18 +114,10 @@
             this.groupBox1.Controls.Add(this.listBox2);
             this.groupBox1.Location = new System.Drawing.Point(265, 18);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(264, 216);
+            this.groupBox1.Size = new System.Drawing.Size(297, 216);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "WeightCalc";
-            // 
-            // domainUpDown1
-            // 
-            this.domainUpDown1.Location = new System.Drawing.Point(224, 211);
-            this.domainUpDown1.Name = "domainUpDown1";
-            this.domainUpDown1.Size = new System.Drawing.Size(120, 22);
-            this.domainUpDown1.TabIndex = 10;
-            this.domainUpDown1.Text = "domainUpDown1";
             // 
             // label3
             // 
@@ -148,6 +139,7 @@
             // 
             // numberOfSetToCarry
             // 
+            this.numberOfSetToCarry.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.numberOfSetToCarry.Location = new System.Drawing.Point(7, 80);
             this.numberOfSetToCarry.Name = "numberOfSetToCarry";
             this.numberOfSetToCarry.Size = new System.Drawing.Size(57, 22);
@@ -172,7 +164,7 @@
             // 
             this.lblETA.AutoSize = true;
             this.lblETA.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblETA.Location = new System.Drawing.Point(6, 24);
+            this.lblETA.Location = new System.Drawing.Point(6, 29);
             this.lblETA.Name = "lblETA";
             this.lblETA.Size = new System.Drawing.Size(35, 38);
             this.lblETA.TabIndex = 11;
@@ -201,6 +193,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.dUpDown2);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.lblCountdown);
@@ -238,11 +231,20 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "sec/set";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 17);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "ETA";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(551, 246);
+            this.ClientSize = new System.Drawing.Size(574, 246);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -274,8 +276,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox numberOfSetToCarry;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DomainUpDown domainUpDown1;
         private System.Windows.Forms.DomainUpDown dUpDown2;
+        private System.Windows.Forms.Label label4;
     }
 }
 
