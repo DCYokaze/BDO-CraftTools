@@ -44,9 +44,9 @@
             this.lblCountdown = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.dUpDown2 = new System.Windows.Forms.DomainUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -58,17 +58,17 @@
             // 
             // btnSetTimer
             // 
-            this.btnSetTimer.Location = new System.Drawing.Point(84, 136);
+            this.btnSetTimer.Location = new System.Drawing.Point(102, 136);
             this.btnSetTimer.Name = "btnSetTimer";
-            this.btnSetTimer.Size = new System.Drawing.Size(75, 23);
+            this.btnSetTimer.Size = new System.Drawing.Size(57, 23);
             this.btnSetTimer.TabIndex = 1;
-            this.btnSetTimer.Text = "sec(+10)";
+            this.btnSetTimer.Text = "set";
             this.btnSetTimer.UseVisualStyleBackColor = true;
             this.btnSetTimer.Click += new System.EventHandler(this.btnSetTimer_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(22, 136);
+            this.textBox1.Location = new System.Drawing.Point(31, 136);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(56, 22);
             this.textBox1.TabIndex = 2;
@@ -209,6 +209,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Timer";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 17);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "ETA";
+            // 
             // dUpDown2
             // 
             this.dUpDown2.Items.Add("10");
@@ -231,15 +240,6 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "sec/set";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 18);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 17);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "ETA";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -248,7 +248,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "BDO-CraftTools";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

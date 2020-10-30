@@ -14,7 +14,8 @@ namespace WindowsFormsTimer01
     {
         private DateTime m_dateTimeFininsh = DateTime.MinValue;
         private int m_iRawSec = 0;
-        private int m_iPadding = 10;//sec
+        //padding, calculate from 10% of durability decreased, eg. 320dur will pad with 32 seconds
+        private int m_iPadding = 10;
         private List<DataBaseMemory> db;
 
         public Form1()
@@ -38,12 +39,25 @@ namespace WindowsFormsTimer01
                 {
                     //this.BringToFront();
                     this.Activate();
+                    crafting_state_change(1);
                     /*
                     MessageBox.Show("msggg", "captionnnn",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Question);
                                  */
                 }
+            }
+        }
+        private void crafting_state_change(int state)
+        {
+            switch (state)
+            {
+                case 0:
+                    this.BackColor = SystemColors.Control; break;
+                case 1:
+                    this.BackColor = Color.Red;break;
+                default:
+                    this.BackColor = SystemColors.Control; break;
             }
         }
 
@@ -96,10 +110,11 @@ namespace WindowsFormsTimer01
             {
                 if (checkBox1.Checked == true)
                     iTimeMultiplier -= 4;
-                m_iRawSec = numOfTimes * iTimeMultiplier + m_iPadding;//got the raw second, keep this number.
+                m_iRawSec = numOfTimes * iTimeMultiplier + ((numOfTimes*m_iPadding)/100);//got the raw second, keep this number.
             }
             m_dateTimeFininsh = DateTime.Now.AddSeconds(m_iRawSec);
             lblETA.Text = m_dateTimeFininsh.ToString("HH:mm:ss");
+            crafting_state_change(0);
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -108,6 +123,7 @@ namespace WindowsFormsTimer01
             m_dateTimeFininsh = DateTime.MinValue;
             lblETA.Text = m_dateTimeFininsh.ToString("HH:mm:ss");
             lblCountdown.Text = lblETA.Text;
+            crafting_state_change(0);
         }
 
         private void numberOfSetToCarry_TextChanged(object sender, EventArgs e)
