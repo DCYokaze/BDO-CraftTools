@@ -79,7 +79,8 @@ namespace WindowsFormsTimer01
             double weightEachSet = d.weight;
             
             int iNumOfSetToCarry = 0;
-            if ( double.TryParse(textBox2.Text, out double weightLeft) )
+            double weightLeft = (double)numWeight.Value;
+            //if ( double.TryParse(textBox2.Text, out double weightLeft) )
             {
                 iNumOfSetToCarry = Convert.ToInt32(Math.Floor(weightLeft / weightEachSet));
             }
@@ -105,8 +106,10 @@ namespace WindowsFormsTimer01
 
         private void btnSetTimer_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(textBox1.Text, out int numOfTimes)
-                && int.TryParse(dUpDown2.Text, out int iTimeMultiplier))
+            //if(numDurability.Value)
+            int numOfTimes = (int)numDurability.Value;
+            int iTimeMultiplier = (int)numSecPerCook.Value;
+            if ( numOfTimes >= 0 && iTimeMultiplier >= 0)
             {
                 /*
                 if (checkBox1.Checked == true)
@@ -185,5 +188,23 @@ namespace WindowsFormsTimer01
             ingrediences.Clear();
         }
     }
-
+    public class NumericUpDownFix : System.Windows.Forms.NumericUpDown
+    {
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            HandledMouseEventArgs hme = e as HandledMouseEventArgs;
+            if (hme != null)
+                hme.Handled = true;
+            if (e.Delta > 0)
+            {
+                decimal newVal = this.Value + this.Increment;
+                this.Value = Math.Min(newVal, this.Maximum);
+            }
+            else if (e.Delta < 0)
+            {
+                decimal newVal = this.Value - this.Increment;
+                this.Value = Math.Max(newVal, this.Minimum);
+            }
+        }
+    }
 }
