@@ -108,8 +108,10 @@ namespace WindowsFormsTimer01
             if (int.TryParse(textBox1.Text, out int numOfTimes)
                 && int.TryParse(dUpDown2.Text, out int iTimeMultiplier))
             {
+                /*
                 if (checkBox1.Checked == true)
                     iTimeMultiplier -= 4;
+                */
                 m_iRawSec = numOfTimes * iTimeMultiplier + ((numOfTimes*m_iPadding)/100);//got the raw second, keep this number.
             }
             m_dateTimeFininsh = DateTime.Now.AddSeconds(m_iRawSec);
@@ -156,6 +158,11 @@ namespace WindowsFormsTimer01
             }
             //
             int x = 0;
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            btnStop_Click(sender, e);
         }
     }
     public class DataBaseMemory

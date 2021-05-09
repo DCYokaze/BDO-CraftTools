@@ -39,7 +39,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.numberOfSetToCarry = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lblETA = new System.Windows.Forms.Label();
             this.lblCountdown = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
@@ -101,7 +100,7 @@
             this.textBox3.Location = new System.Drawing.Point(164, 18);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(127, 106);
+            this.textBox3.Size = new System.Drawing.Size(127, 147);
             this.textBox3.TabIndex = 8;
             // 
             // groupBox1
@@ -148,18 +147,6 @@
             this.numberOfSetToCarry.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numberOfSetToCarry.TextChanged += new System.EventHandler(this.numberOfSetToCarry_TextChanged);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(22, 176);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(141, 21);
-            this.checkBox1.TabIndex = 10;
-            this.checkBox1.Text = "+3 SilverEmbroid ";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // lblETA
             // 
             this.lblETA.AutoSize = true;
@@ -185,7 +172,7 @@
             this.btnStop.BackColor = System.Drawing.SystemColors.Desktop;
             this.btnStop.Location = new System.Drawing.Point(165, 136);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(44, 23);
+            this.btnStop.Size = new System.Drawing.Size(44, 61);
             this.btnStop.TabIndex = 13;
             this.btnStop.Text = "S";
             this.btnStop.UseVisualStyleBackColor = false;
@@ -197,7 +184,6 @@
             this.groupBox2.Controls.Add(this.dUpDown2);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.lblCountdown);
-            this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.btnStop);
             this.groupBox2.Controls.Add(this.lblETA);
             this.groupBox2.Controls.Add(this.textBox1);
@@ -250,6 +236,7 @@
             this.Name = "Form1";
             this.Text = "BDO-CraftTools";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -267,7 +254,6 @@
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label lblETA;
         private System.Windows.Forms.Label lblCountdown;
         private System.Windows.Forms.Button btnStop;
